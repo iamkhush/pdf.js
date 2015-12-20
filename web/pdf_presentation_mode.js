@@ -268,7 +268,12 @@ var PDFPresentationMode = (function PDFPresentationModeClosure() {
         if (!isInternalLink) {
           // Unless an internal link was clicked, advance one page.
           evt.preventDefault();
-          this.pdfViewer.currentPageNumber += (evt.shiftKey ? -1 : 1);
+          // this.pdfViewer.currentPageNumber += (evt.shiftKey ? -1 : 1);
+          if (evt.shiftKey) {
+            this.pdfViewer.previousPage();
+          } else {
+            this.pdfViewer.nextPage();
+          }
         }
       }
     },

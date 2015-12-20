@@ -18,7 +18,7 @@
            PDFThumbnailViewer, URL, noContextMenuHandler, SecondaryToolbar,
            PasswordPrompt, PDFPresentationMode, PDFDocumentProperties, HandTool,
            Promise, PDFLinkService, PDFOutlineView, PDFAttachmentView,
-           OverlayManager, PDFFindController, PDFFindBar, PDFViewer,
+           OverlayManager, PDFFindController, PDFFindBar, PDFViewer, TwoPageViewMode,
            PDFRenderingQueue, PresentationModeState, parseQueryString,
            RenderingStates, UNKNOWN_SCALE, DEFAULT_SCALE_VALUE,
            IGNORE_CURRENT_POSITION_ON_ZOOM: true */
@@ -82,6 +82,7 @@ var mozL10n = document.mozL10n || document.webL10n;
 //#include pdf_thumbnail_viewer.js
 //#include pdf_outline_view.js
 //#include pdf_attachment_view.js
+//#include two_page_view_mode.js
 
 var PDFViewerApplication = {
   initialBookmark: document.location.hash.substring(1),
@@ -198,6 +199,7 @@ var PDFViewerApplication = {
     });
 
     SecondaryToolbar.initialize({
+      twoPageViewMode: TwoPageViewMode,
       toolbar: document.getElementById('secondaryToolbar'),
       toggleButton: document.getElementById('secondaryToolbarToggle'),
       presentationModeButton:
@@ -210,7 +212,11 @@ var PDFViewerApplication = {
       lastPage: document.getElementById('lastPage'),
       pageRotateCw: document.getElementById('pageRotateCw'),
       pageRotateCcw: document.getElementById('pageRotateCcw'),
-      documentPropertiesButton: document.getElementById('documentProperties')
+      documentPropertiesButton: document.getElementById('documentProperties'),
+      onePageView: document.getElementById('onePageView'),
+      twoPageView: document.getElementById('twoPageView'),
+      twoPageViewShowCoverPage:
+        document.getElementById('twoPageViewShowCoverPage')
     });
 
     if (this.supportsFullscreen) {
@@ -239,6 +245,16 @@ var PDFViewerApplication = {
       passwordText: document.getElementById('passwordText'),
       passwordSubmit: document.getElementById('passwordSubmit'),
       passwordCancel: document.getElementById('passwordCancel')
+    });
+
+    TwoPageViewMode.initialize({
+      pdfViewer: this.pdfViewer,
+      container: container,
+      viewer: viewer,
+      onePageView: document.getElementById('onePageView'),
+      twoPageView: document.getElementById('twoPageView'),
+      twoPageViewShowCoverPage:
+        document.getElementById('twoPageViewShowCoverPage')
     });
 
     var self = this;

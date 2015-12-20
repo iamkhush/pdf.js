@@ -28,6 +28,7 @@ var SecondaryToolbar = {
     // Define the toolbar buttons.
     this.toggleButton = options.toggleButton;
     this.presentationModeButton = options.presentationModeButton;
+    this.twoPageViewMode = options.twoPageViewMode;
     this.openFile = options.openFile;
     this.print = options.print;
     this.download = options.download;
@@ -37,6 +38,10 @@ var SecondaryToolbar = {
     this.pageRotateCw = options.pageRotateCw;
     this.pageRotateCcw = options.pageRotateCcw;
     this.documentPropertiesButton = options.documentPropertiesButton;
+
+    this.onePageView = options.onePageView;
+    this.twoPageView = options.twoPageView;
+    this.twoPageViewShowCoverPage = options.twoPageViewShowCoverPage;
 
     // Attach the event listeners.
     var elements = [
@@ -55,13 +60,23 @@ var SecondaryToolbar = {
       { element: this.pageRotateCw, handler: this.pageRotateCwClick },
       { element: this.pageRotateCcw, handler: this.pageRotateCcwClick },
       { element: this.documentPropertiesButton,
-        handler: this.documentPropertiesClick }
-    ];
+        handler: this.documentPropertiesClick },
+      { element: this.onePageView, handler: this.twoPageViewMode.disable,
+        scope: this.twoPageViewMode },
+      { element: this.twoPageView, handler: this.twoPageViewMode.enable,
+        scope: this.twoPageViewMode },
+      { element: this.twoPageViewShowCoverPage,
+        handler: this.twoPageViewMode.toggleCoverPage,
+        scope: this.twoPageViewMode }
 
+    ];
+    var element, handler, scope;
     for (var item in elements) {
-      var element = elements[item].element;
+      element = elements[item].element;
       if (element) {
-        element.addEventListener('click', elements[item].handler.bind(this));
+        handler = elements[item].handler;
+        scope = (elements[item].scope || this);
+        element.addEventListener('click', handler.bind(scope));
       }
     }
   },

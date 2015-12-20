@@ -430,6 +430,9 @@ var PDFViewer = (function pdfViewer() {
                              currentPage.width * currentPage.scale;
         var pageHeightScale = (this.container.clientHeight - vPadding) /
                               currentPage.height * currentPage.scale;
+        if (TwoPageViewMode.active) {
+          pageWidthScale /= 2;
+        }
         switch (value) {
           case 'page-actual':
             scale = 1;

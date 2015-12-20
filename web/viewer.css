@@ -1011,6 +1011,18 @@ html[dir="rtl"] .secondaryToolbarButton > span {
   content: url(images/secondaryToolbarButton-documentProperties.png);
 }
 
+.secondaryToolbarButton.onePageView::before {
+  content: url(images/secondaryToolbarButton-onePageView.png);
+}
+
+.secondaryToolbarButton.twoPageView::before {
+  content: url(images/secondaryToolbarButton-twoPageView.png);
+}
+
+.secondaryToolbarButton.twoPageViewShowCoverPage::before {
+  content: url(images/secondaryToolbarButton-twoPageViewShowCoverPage.png);
+}
+
 .verticalToolbarSeparator {
   display: block;
   padding: 8px 0;
@@ -1636,6 +1648,7 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
     content: url(images/findbarButton-previous@2x.png);
   }
   html[dir='rtl'] .toolbarButton.findPrevious::before {
+
     content: url(images/findbarButton-previous-rtl@2x.png);
   }
 
@@ -1734,6 +1747,18 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
 
   .secondaryToolbarButton.documentProperties::before {
     content: url(images/secondaryToolbarButton-documentProperties@2x.png);
+  }
+
+  .secondaryToolbarButton.onePageView::before {
+    content: url(images/secondaryToolbarButton-onePageView.png);
+  }
+
+  .secondaryToolbarButton.twoPageView::before {
+    content: url(images/secondaryToolbarButton-twoPageView.png);
+  }
+
+  .secondaryToolbarButton.twoPageViewShowCoverPage::before {
+    content: url(images/secondaryToolbarButton-twoPageViewShowCoverPage.png);
   }
 
   .outlineItemToggler::before {

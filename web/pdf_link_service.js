@@ -71,6 +71,28 @@ var PDFLinkService = (function () {
       this.pdfViewer.currentPageNumber = value;
     },
 
+    previousPage: function pdfViewNextPage() {
+      if (TwoPageViewMode.active) {
+        TwoPageViewMode.previousPage();
+      } else {
+        this.page--;
+      }
+    },
+
+    nextPage: function pdfViewNextPage() {
+      if (TwoPageViewMode.active) {
+        TwoPageViewMode.nextPage();
+      } else {
+        this.page++;
+      }
+    },
+
+    get lastPageNumber() {
+      return (TwoPageViewMode.active ?
+              TwoPageViewMode.getLastPageNumber() : this.pages.length);
+    },
+
+
     /**
      * @param dest - The PDF destination object.
      */
@@ -113,7 +135,7 @@ var PDFLinkService = (function () {
         destinationPromise = this.pdfDocument.getDestination(dest);
       } else {
         destinationPromise = Promise.resolve(dest);
-      }
+        }
       destinationPromise.then(function(destination) {
         dest = destination;
         if (!(destination instanceof Array)) {
@@ -261,15 +283,18 @@ var PDFLinkService = (function () {
           break;
 
         case 'NextPage':
-          this.page++;
+          this.nextPage();
+          // this.page++;
           break;
 
         case 'PrevPage':
-          this.page--;
+          this.previousPage()
+          // this.page--;
           break;
 
         case 'LastPage':
-          this.page = this.pagesCount;
+          this.page = this.lastPageNumber;
+          // this.page = this.pagesCount;
           break;
 
         case 'FirstPage':

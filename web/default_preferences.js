@@ -32,4 +32,5 @@ var DEFAULT_PREFERENCES = {
   disableTextLayer: false,
   useOnlyCssZoom: false,
   externalLinkTarget: 0,
+  twoPageViewModeOnLoad: -1,
 };
